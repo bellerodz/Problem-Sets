@@ -1,0 +1,30 @@
+fhand = open ('CO-OPS__8729108__wl.csv')
+count=0
+previous_water_level=0
+water_change=0
+fhand.readline()
+
+for line in fhand:
+    count=count+1
+    line=line.strip()
+    
+    columns=line.split(sep=',')
+    date_time=columns[0]
+    print(columns[1])
+    try:
+        water_level=float(columns[1])
+    except:
+        print(f"No water level data was recorded on {date_time}")
+        continue 
+    if count==1:
+        previous_water_level=water_level
+        
+    if water_level>previous_water_level:
+        water_change=water_level - previous_water_level
+        previous_water_level=water_level
+        
+    if water_change>0.25:
+        print("Water level increased more than 0.25!")
+    
+    if water_level>5.0:
+        print("Water level is over 5.0!")
