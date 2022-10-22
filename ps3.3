@@ -1,0 +1,32 @@
+fhand = open ('CO-OPS__8729108__wl.csv')
+count=0;
+previous_water_level=0
+date_time_max_water_change= ''
+water_change=0
+max_water_change=0
+fhand.readline()
+
+for line in fhand:
+    count=count+1
+    line=line.strip()
+    
+    columns=line.split(sep=',')
+    date_time=columns[0]
+    try:
+        water_level=float(columns[1])
+    except:
+        continue  
+
+    if count==1:
+        previous_water_level=water_level
+        
+    if water_level>previous_water_level:
+        water_change=water_level - previous_water_level
+        previous_water_level=water_level
+        
+    if water_change> max_water_change:
+        max_water_change=water_change
+        date_time_max_water_change=date_time
+    
+    
+print(max_water_change, date_time_max_water_change)
