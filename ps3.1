@@ -1,0 +1,27 @@
+fhand = open ('CO-OPS__8729108__wl.csv');
+count=0;
+max_water_level=0;
+date_time_max_water_level= ''
+fhand.readline()
+
+for line in fhand:
+    count=count+1
+    line=line.strip()
+    
+    columns=line.split(sep=',')
+    print(columns[2])
+    date_time=columns[1]
+    try:
+        water_level=float(columns[2])
+    except:
+        print("No water level data for {date_time}")
+        continue  
+    
+    if water_level>max_water_level:
+        print("New max elevation found!")
+        max_water_level=water_level
+        date_time_max_water_level = date_time
+    
+print('Line Count:', count)
+print(water_level, date_time)
+print(max_water_level, date_time_max_water_level)
