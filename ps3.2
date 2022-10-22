@@ -1,0 +1,36 @@
+fhand = open ('CO-OPS__8729108__wl.csv')
+count=0
+max_water_level=0
+min_water_level=100
+average_water_level=0
+total_water_level=0
+date_time_max_water_level= ''
+date_time_min_water_level= ''
+date_time_average_water_level= ''
+fhand.readline()
+
+for line in fhand:
+    count=count+1
+    line=line.strip()
+    
+    columns=line.split(sep=',')
+    date_time=columns[0]
+    try:
+        water_level=float(columns[1])
+        total_water_level= water_level + total_water_level
+    except:
+        continue  
+    
+    if water_level>max_water_level:
+        max_water_level=water_level
+        date_time_max_water_level = date_time
+        
+    if water_level<min_water_level:
+        min_water_level=water_level
+        date_time_min_water_level = date_time
+
+average_water_level= total_water_level/count
+    
+print(max_water_level, date_time_max_water_level)
+print(min_water_level, date_time_min_water_level)
+print(average_water_level)
